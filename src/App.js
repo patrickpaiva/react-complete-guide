@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import ValidationComponent from './ValidationComponent/ValidationComponent'
+import CharComponent from './CharComponent/CharComponent'
 
 class App extends Component {
   state = {
-    inputLength: 0
+    inputLength: 0,
+    inputArr: [],
+    inputText: ''
   }
 
   inputChangeHandler = (event) => {
@@ -12,7 +15,21 @@ class App extends Component {
     const sentenceArr = sentence.split('')
     
     this.setState({
-      inputLength: sentenceArr.length
+      inputLength: sentenceArr.length,
+      inputArr: [...sentenceArr],
+      inputText: sentence
+    })
+  }
+
+  clickCharHandler = (index) => {
+    const newInputArr = [...this.state.inputArr]
+    newInputArr.splice(index, 1)
+    const newInput = newInputArr.join('')
+
+    this.setState({
+      inputLength: newInputArr.length,
+      inputArr: [...newInputArr],
+      inputText: newInput
     })
   }
   render() {
@@ -29,8 +46,13 @@ class App extends Component {
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
         <div>
           <p>Current Length: {this.state.inputLength}</p>
-          <input type="text" onChange={(event) => this.inputChangeHandler(event)}/>
+          <input type="text" value={this.state.inputText} onChange={(event) => this.inputChangeHandler(event)}/>
           <ValidationComponent textLength={this.state.inputLength} />
+          <div>
+            { this.state.inputArr.map((char, index) => {
+              return <CharComponent key={index} char={char} click={() => this.clickCharHandler(index)} />
+            })}
+          </div>
         </div>
       </div>
     );
