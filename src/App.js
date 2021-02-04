@@ -38,7 +38,7 @@ class App extends Component {
           </div>
           <Switch>
             <Route path="/courses" exact component={Courses} />
-            <Route path="/course/:id" exact component={Course} />
+            <Route path="/course/:id/:title" exact component={Course} />
             <Route path="/users" exact component={Users} />
           </Switch>
         </React.Fragment>
