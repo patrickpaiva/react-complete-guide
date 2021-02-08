@@ -10,14 +10,12 @@ const reducer = (state = initialState, action) => {
                 name: 'Max',
                 age: Math.floor( Math.random() * 40 )
             }
-            const newPersonsArr = [...state.persons]
-            newPersonsArr.concat(newPerson)
+            const newPersonsArr = state.persons.concat(newPerson)
             return {
                 persons: [...newPersonsArr]
             }
         case 'DELETE_PERSON':
-            const newPersonsArr = [...state.persons]
-            const updatedPersonsArr = newPersonsArr.filter(person => person.id !== action.personId)
+            const updatedPersonsArr = state.persons.filter(person => person.id !== action.personId)
             return {
                 persons: [...updatedPersonsArr]
             }
