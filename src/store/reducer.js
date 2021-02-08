@@ -20,6 +20,7 @@ const reducer = (state = initialState, action) => {
                 persons: [...updatedPersonsArr]
             }
     }
+    return state
 }
 
 export default reducer
